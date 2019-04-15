@@ -10,7 +10,7 @@ const BookSchema = new Schema({
   genre: [{type: Schema.Types.ObjectId, ref: 'Genre'}]
 });
 
-// 虚拟属性'url'：藏书 URL
+// 虚拟属性 'url'：藏书 URL
 BookSchema
   .virtual('url')
   .get(function () {
