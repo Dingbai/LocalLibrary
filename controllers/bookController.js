@@ -2,6 +2,7 @@ var Book = require('../models/book')
 var Author = require('../models/author')
 var Genre = require('../models/genre')
 var BookInstance = require('../models/bookinstance')
+var User = require('../models/sequelize')
 const { body, validationResult } = require('express-validator/check')
 const { sanitizeBody } = require('express-validator/filter')
 
@@ -27,10 +28,14 @@ exports.index = function(req, res) {
       }
     },
     function(err, results) {
-      res.render('index', {
-        title: 'Local Library Home',
-        error: err,
-        data: results
+      User.findAll().then(users => {
+        console.log('users----------------------------' + users)
+        res.render('index', {
+          title: 'Local Library Home',
+          error: err,
+          data: results,
+          users: users
+        })
       })
     }
   )
